@@ -55,4 +55,20 @@ public class BoardController {
         service.remove(id);
         return "redirect:/";
     }
+
+    @GetMapping("/modify")
+    public String modifyForm(Integer id, Model model) {
+        // 조회 해서
+        // 모델에 넣고
+        model.addAttribute("board", service.get(id));
+        // view 로 포워드
+        return "board/modify";
+    }
+
+    @PostMapping("/modify")
+    public String modifyPost(Board board, RedirectAttributes rttr) {
+        service.modify(board);
+        rttr.addAttribute("id", board.getId());
+        return "redirect:/board";
+    }
 }
