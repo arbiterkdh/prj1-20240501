@@ -8,13 +8,14 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
+<c:import url="/WEB-INF/fragment/navbar.jsp"/>
+
 <div class="container">
-    <c:import url="/WEB-INF/fragment/navbar.jsp"/>
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-8">
 
 
-            <h3>${board.id} 번 게시물</h3>
+            <h3 class="mb-5">${board.id} 번 게시물</h3>
             <div class="mb-3">
                 <label for="inputTitle" class="form-label">
                     제목
