@@ -28,7 +28,7 @@ public class BoardService {
     }
 
 
-    public Board delete(Integer id) {
+    public int delete(Integer id) {
         return mapper.deleteById(id);
     }
 }

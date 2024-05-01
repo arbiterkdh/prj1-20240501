@@ -34,5 +34,5 @@ public interface BoardMapper {
             FROM board
             WHERE id = #{id}
             """)
-    Board deleteById(Integer id);
+    int deleteById(Integer id);
 }

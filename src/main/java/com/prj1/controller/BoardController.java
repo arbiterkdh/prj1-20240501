@@ -49,16 +49,21 @@ public class BoardController {
         return "board/home";
     }
 
-//    @GetMapping("/delete")
-//    public String delete() {
-//        return "board";
-//    }
-
     @PostMapping("/delete")
     public String deletePost(Integer id) {
-//        rttr.add
         service.delete(id);
-        System.out.println("BoardController.deletePost");
-        return "redirect:/board";
+        return "redirect:/";
     }
+
+    @GetMapping("/modify")
+    public String modify(Integer id, Model model) {
+        model.addAttribute("board", service.get(id));
+        return "board/modify";
+    }
+
+//    @PostMapping("/modify")
+//    public String modifyPost() {
+//
+//        return null;
+//    }
 }
