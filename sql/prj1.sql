@@ -13,3 +13,7 @@ CREATE TABLE board
 
 SELECT *
 FROM board;
+
+DELETE
+FROM board
+WHERE id = 1;

@@ -22,7 +22,6 @@ public class BoardController {
 
     @PostMapping("/add")
     public String addPost(Board board, RedirectAttributes rttr) {
-        System.out.println("board = " + board);
 
         service.add(board);
 
@@ -48,5 +47,18 @@ public class BoardController {
         model.addAttribute("boardList", service.list());
         // jsp 로 포워드
         return "board/home";
+    }
+
+//    @GetMapping("/delete")
+//    public String delete() {
+//        return "board";
+//    }
+
+    @PostMapping("/delete")
+    public String deletePost(Integer id) {
+//        rttr.add
+        service.delete(id);
+        System.out.println("BoardController.deletePost");
+        return "redirect:/board";
     }
 }
