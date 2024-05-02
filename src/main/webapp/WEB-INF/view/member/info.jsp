@@ -42,9 +42,20 @@
                     <input value="${member.inserted}" id="inputInserted" type="datetime-local" readonly=""
                            class="form-control">
                 </div>
+                <div>
+                    <button class="btn btn-danger" form="formDelete">제명</button>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
+
+<%--div.d-none>form>input:h[name=id]--%>
+<div class="d-none" onsubmit="return confirm('제명하시겠습니까?')">
+    <form action="/member/remove" method="post" id="formDelete">
+        <input type="hidden" name="id" value="${member.id}">
+    </form>
 </div>
 
 
