@@ -23,7 +23,13 @@
                 <%--              div*3>label.form-label+input.form-control--%>
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">이메일</label>
-                    <input name="email" id="inputEmail" type="email" class="form-control" required>
+                    <div class="input-group">
+                        <input name="email" id="inputEmail" type="email" class="form-control" required>
+                        <%--버튼이 폼 안에 있으면 submit 역할을 하기 때문에 그걸 방지하기 위해 type 을 버튼으로 준다.--%>
+                        <button onclick="emailCheck();" type="button" id="buttonEmailCheck"
+                                class="btn btn-outline-secondary">중복확인
+                        </button>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">패스워드</label>
@@ -48,6 +54,23 @@
     </div>
 </div>
 <script>
+    // 함수 내부 로직에서 동기를 맞추는 await 와 같은 키워드를 쓰면 함수 시그니처 앞에 async 를 써줘야 함.
+    async function emailCheck() {
+        const emailValue = document.querySelector("#inputEmail").value;
+        const url = "/member/email?email=" + emailValue;
+
+        // ajax 요청
+        const response = await fetch(encodeURI(url));
+        // ajax 는 비동기식으로 작업을 처리하기 때문에 동기를 맞추기 위해 await 키워드를 붙임.
+        // 특수기호나 한글 등은 그대로 읽을 수 없기 때문에 url encoding 을 해야함
+
+        // 응답 처리
+        // console.log(response.text());
+        // .text() 는 응답을 텍스트형식으로 볼 수 있는 메소드
+        alert(await response.text());
+        // 마찬가지로 response 를 기다렸다 출력하기 위해 await 키워드 붙임.
+    }
+
     function passwordCheck() {
         const password = document.querySelector("#inputPassword").value;
         const passwordCheck = document.querySelector("#inputPasswordCheck").value;
@@ -72,6 +95,7 @@
         }
     }
 </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
         integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

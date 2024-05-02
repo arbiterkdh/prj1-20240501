@@ -43,4 +43,10 @@ public interface MemberMapper {
             WHERE id = #{id}
             """)
     int update(Member member);
+
+    @Select("""
+            SELECT * FROM member
+            WHERE email = #{email}
+            """)
+    Member selectByEmail(String email);
 }
