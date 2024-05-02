@@ -46,4 +46,15 @@ public class MemberController {
         service.remove(id);
         return "redirect:/member/list";
     }
+
+    @GetMapping("modify")
+    public void modifyForm(Integer id, Model model) {
+        model.addAttribute("member", service.get(id));
+    }
+
+    @PostMapping("modify")
+    public String modifyPost(Member member) {
+        service.modify(member);
+        return "redirect:/member/list";
+    }
 }

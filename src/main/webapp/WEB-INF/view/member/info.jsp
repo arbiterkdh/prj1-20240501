@@ -21,28 +21,29 @@
                     <label for="inputEmail" class="form-label">
                         이메일
                     </label>
-                    <input value="${member.email}" id="inputEmail" type="email" readonly="" class="form-control">
+                    <input value="${member.email}" id="inputEmail" type="email" readonly class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">
                         패스워드
                     </label>
-                    <input value="${member.password}" id="inputPassword" type="text" readonly="" class="form-control">
+                    <input value="${member.password}" id="inputPassword" type="text" readonly class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="inputNickName" class="form-label">
                         별명
                     </label>
-                    <input value="${member.nickName}" id="inputNickName" type="text" readonly="" class="form-control">
+                    <input value="${member.nickName}" id="inputNickName" type="text" readonly class="form-control">
                 </div>
                 <div>
                     <label for="inputInserted" class="form-label">
                         가입일시
                     </label>
-                    <input value="${member.inserted}" id="inputInserted" type="datetime-local" readonly=""
+                    <input value="${member.inserted}" id="inputInserted" type="datetime-local" readonly
                            class="form-control">
                 </div>
                 <div>
+                    <a class="btn btn-secondary" href="/member/modify?id=${member.id}">수정</a>
                     <button class="btn btn-danger" form="formDelete">제명</button>
                 </div>
 
