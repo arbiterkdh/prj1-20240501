@@ -35,7 +35,7 @@
                     </label>
                     <input value="${member.nickName}" id="inputNickName" type="text" readonly="" class="form-control">
                 </div>
-                <div>
+                <div class="mb-3">
                     <label for="inputInserted" class="form-label">
                         가입일시
                     </label>
@@ -44,6 +44,7 @@
                 </div>
                 <div>
                     <button class="btn btn-danger" form="formDelete">제명</button>
+                    <a class="btn btn-secondary" href="/member/modify?id=${member.id}">정보 수정</a>
                 </div>
 
             </div>

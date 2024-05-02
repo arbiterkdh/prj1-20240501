@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -44,6 +45,19 @@ public class MemberController {
     @PostMapping("remove")
     public String remove(Integer id) {
         service.remove(id);
-        return "redirect:/member/list";
+        return "redirect:/member/sign-up";
+    }
+
+    @GetMapping("modify")
+    public void modifyForm(Integer id, Model model) {
+        model.addAttribute("member", service.get(id));
+    }
+
+    @PostMapping("modify")
+    public String modifyPost(Member member, RedirectAttributes rttr) {
+        service.modify(member);
+
+        rttr.addAttribute("id", member.getId());
+        return "redirect:/member";
     }
 }

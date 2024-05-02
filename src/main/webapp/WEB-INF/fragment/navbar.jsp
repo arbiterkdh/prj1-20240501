@@ -31,11 +31,6 @@
                     </a>
                 </li>
             </ul>
-            </ul>
         </div>
     </div>
 </nav>
-
-<div>
-
-</div>
