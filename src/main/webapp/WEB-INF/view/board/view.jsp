@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,16 +43,34 @@
                 </label>
                 <input id="inputInserted" class="form-control" type="datetime-local" readonly value="${board.inserted}">
             </div>
-            <div class="mb-3">
-                <button form="formDelete" class="btn btn-danger">삭제</button>
-                <a href="/modify?id=${board.id}" class="btn btn-secondary">수정</a>
-            </div>
-            <div>
-                <form id="formDelete" action="/delete" method="post" onsubmit="return confirm('정말로 삭제 하시겠습니까?')">
-                    <input type="hidden" name="id" value="${board.id}">
-                </form>
-            </div>
 
+
+            <%--            로그인된 사용자의 id 와--%>
+            <sec:authorize access="isAuthenticated()">
+                <%--            게시물의 memberId 가 같으면--%>
+                <%--                authentication 태그를 쓸 때 property 를 써야함--%>
+                <sec:authentication property="principal.member" var="member"/>
+                <c:if test="${member.id eq board.memberId}">
+                    <div class="mb-3">
+                        <a href="/modify?id=${board.id}" class="btn btn-secondary">수정</a>
+                        <button form="formDelete" class="btn btn-danger">삭제</button>
+                    </div>
+                </c:if>
+            </sec:authorize>
+
+            <sec:authorize access="isAuthenticated()">
+                <%--            게시물의 memberId 가 같으면--%>
+                <%--                authentication 태그를 쓸 때 property 를 써야함--%>
+                <sec:authentication property="principal.member" var="member"/>
+                <c:if test="${member.id eq board.memberId}">
+                    <div>
+                        <form id="formDelete" action="/delete" method="post"
+                              onsubmit="return confirm('정말로 삭제 하시겠습니까?')">
+                            <input type="hidden" name="id" value="${board.id}">
+                        </form>
+                    </div>
+                </c:if>
+            </sec:authorize>
 
         </div>
     </div>

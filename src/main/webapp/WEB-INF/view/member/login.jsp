@@ -11,36 +11,33 @@
 <body>
 <c:import url="/WEB-INF/fragment/navbar.jsp"/>
 
-<%--div.container>div.row>div.col-6--%>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-
-
-            <h3 class="mb-5">새 게시물 작성</h3>
-            <form action="/add" method="post">
-
-                <div class="mb-3">
-                    <%--                    label.form-label--%>
-                    <label for="inputTitle" class="form-label">
-                        제목
-                    </label>
-                    <input class="form-control" id="inputTitle" type="text" name="title" required>
-                </div>
-                <div class="mb-3">
-                    <label for="inputTextarea" class="form-label">
-                        본문
-                    </label>
-                    <textarea class="form-control" name="content" id="inputTextarea" cols="30" rows="10"
-                              required></textarea>
-                </div>
-                <div>
-                    <button class="btn btn-primary">저장</button>
-                </div>
-            </form>
+            <h3 class="mb-5">로그인</h3>
+            <div>
+                <form action="/member/login" method="post">
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">
+                            이메일
+                        </label>
+                        <input id="inputEmail" name="username" type="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword" class="form-label">
+                            패스워드
+                        </label>
+                        <input id="inputPassword" name="password" type="password" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary">로그인</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
         integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

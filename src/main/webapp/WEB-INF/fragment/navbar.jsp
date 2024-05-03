@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
     <div class="container">
@@ -15,21 +16,32 @@
                         목록
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/add">
-                        글쓰기
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/member/list">
-                        회원목록
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/member/sign-up">
-                        회원가입
-                    </a>
-                </li>
+                <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add">
+                            글쓰기
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/member/list">
+                            회원목록
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link" onclick="return confirm('로그아웃 하시겠습니까?')">로그아웃</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="not isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/member/sign-up">
+                            회원가입
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/member/login" class="nav-link">로그인</a>
+                    </li>
+                </sec:authorize>
+
             </ul>
         </div>
     </div>

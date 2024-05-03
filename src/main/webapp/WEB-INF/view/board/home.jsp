@@ -34,12 +34,13 @@
                     <tr>
                         <td>${board.id}</td>
                         <td>
-                            <a href="${viewLink}">
-                                    ${board.title}
-                            </a>
+                            <a href="${viewLink}">${board.title}</a>
                         </td>
                         <td>${board.writer}</td>
-                        <td>${board.inserted}</td>
+                        <td>
+                            <input type="datetime-local" readonly class="form-control-plaintext"
+                                   value="${board.inserted}">
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -48,54 +49,73 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container mt-3">
     <div class="row justify-content-center">
         <div class="col-8">
-            <%--            맨 앞 페이지로 가기--%>
-            <c:url value="/" var="firstPageLink">
-                <c:param name="page" value="1"/>
-            </c:url>
-            <c:if test="${pageInfo.currentPageNumber > 1}">
-                <a href="${firstPageLink}">맨앞</a>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <%--            맨 앞 페이지로 가기--%>
+                    <c:if test="${pageInfo.currentPageNumber > 1}">
+                        <c:url value="/" var="firstPageLink">
+                            <c:param name="page" value="1"/>
+                        </c:url>
+                        <li class="page-item">
+                            <a class="page-link" href="${firstPageLink}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
 
-            </c:if>
+                    <%--            이전 페이지로 가기--%>
+                    <c:if test="${pageInfo.currentPageNumber > 10}">
+                        <c:url value="/" var="prevPageLink">
+                            <c:param name="page" value="${pageInfo.prevPageNumber}"/>
+                        </c:url>
+                        <li class="page-item">
+                            <a class="page-link" href="${prevPageLink}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                    </c:if>
 
-            <%--            이전 페이지로 가기--%>
-            <c:url value="/" var="prevPageLink">
-                <c:param name="page" value="${pageInfo.prevPageNumber}"/>
-            </c:url>
+                    <%--페이지 번호 링크들--%>
+                    <c:forEach begin="${pageInfo.beginPageNumber}" end="${pageInfo.endPageNumber}" var="pageNumber">
+                        <c:url var="pageLink" value="/">
+                            <c:param name="page" value="${pageNumber}"/>
+                        </c:url>
+
+                        <li class="page-item ${pageInfo.currentPageNumber eq pageNumber ? 'active' : ''}">
+                            <a class="page-link" href="${pageLink}">${pageNumber}</a>
+                        </li>
+
+                    </c:forEach>
 
 
-            <c:if test="${pageInfo.currentPageNumber > 10}">
-                <a href="${prevPageLink}">이전</a>
-            </c:if>
+                    <%--            다음 페이지로 가기--%>
+                    <c:if test="${pageInfo.nextPageNumber < pageInfo.lastPageNumber}">
+                        <c:url value="/" var="nextPageLink">
+                            <c:param name="page" value="${pageInfo.nextPageNumber}"/>
+                        </c:url>
+                        <li class="page-item">
+                            <a class="page-link" href="${nextPageLink}" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                    </c:if>
 
-
-            <%--페이지 번호 링크들--%>
-            <c:forEach begin="${pageInfo.beginPageNumber}" end="${pageInfo.endPageNumber}" var="pageNumber">
-                <c:url var="pageLink" value="/">
-                    <c:param name="page" value="${pageNumber}"/>
-                </c:url>
-
-                <a href="${pageLink}">${pageNumber}</a>
-
-            </c:forEach>
-
-            <%--            다음 페이지로 가기--%>
-            <c:url value="/" var="nextPageLink">
-                <c:param name="page" value="${pageInfo.nextPageNumber}"/>
-            </c:url>
-            <c:if test="${pageInfo.nextPageNumber < pageInfo.lastPageNumber}">
-                <a href="${nextPageLink}">다음</a>
-            </c:if>
-
-            <%--            맨 마지막 페이지로 가기--%>
-            <c:url value="/" var="lastPageLink">
-                <c:param name="page" value="${pageInfo.lastPageNumber}"/>
-            </c:url>
-            <c:if test="${pageInfo.currentPageNumber < pageInfo.lastPageNumber}">
-                <a href="${lastPageLink}">맨뒤</a>
-            </c:if>
+                    <%--            맨 마지막 페이지로 가기--%>
+                    <c:if test="${pageInfo.currentPageNumber < pageInfo.lastPageNumber}">
+                        <c:url value="/" var="lastPageLink">
+                            <c:param name="page" value="${pageInfo.lastPageNumber}"/>
+                        </c:url>
+                        <li class="page-item">
+                            <a class="page-link" href="${lastPageLink}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </c:if>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>

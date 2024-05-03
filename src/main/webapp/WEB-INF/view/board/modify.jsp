@@ -33,13 +33,7 @@
                     </label>
                     <textarea style="resize: none" class="form-control" name="content" id="inputTextarea" cols="30"
                               rows="10"
-                              required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="inputWriter" class="form-label">
-                        작성자
-                    </label>
-                    <input class="form-control" id="inputWriter" type="text" name="writer" required>
+                              required>${board.content}</textarea>
                 </div>
                 <div>
                     <button class="btn btn-secondary">수정</button>

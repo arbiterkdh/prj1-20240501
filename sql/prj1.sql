@@ -38,3 +38,21 @@ INSERT INTO board
     (title, content, writer)
 SELECT title, content, writer
 FROM board;
+
+# board 테이블 수정
+# writer 컬럼 지우기
+# member_id INT REFERENCES member(id) 컬럼 추가
+
+ALTER TABLE board
+    DROP COLUMN writer;
+ALTER TABLE board
+    ADD COLUMN member_id INT REFERENCES member (id);
+UPDATE board
+SET member_id = 10
+WHERE id > 0;
+
+SELECT *
+FROM board;
+
+SELECT *
+FROM member;
