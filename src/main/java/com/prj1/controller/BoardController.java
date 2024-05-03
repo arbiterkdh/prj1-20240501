@@ -42,10 +42,10 @@ public class BoardController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Integer page, Model model) {
         // 게시물 목록 조회 (select)
         // 모델에 넣고
-        model.addAttribute("boardList", service.list());
+        model.addAllAttributes(service.list(page));
         // jsp 로 포워드
         return "board/home";
     }
