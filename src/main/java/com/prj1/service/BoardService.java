@@ -41,12 +41,18 @@ public class BoardService {
         int numberOfBoard = mapper.countAll();
         int lastPageNumber = (numberOfBoard - 1) / 10 + 1;
         int endPageNumber = (page - 1) / 10 * 10 + 10;
-        endPageNumber = Math.min(endPageNumber, lastPageNumber);
         int beginPageNumber = endPageNumber - 9;
-//        beginPageNumber =
+        endPageNumber = Math.min(endPageNumber, lastPageNumber);
+
+        int prevPageNumber = beginPageNumber - 10;
+        int nextPageNumber = endPageNumber + 1;
+
         return Map.of("boardList", mapper.selectAllByPage(offset)
                 , "pageInfo", Map.of("lastPageNumber", lastPageNumber,
                         "beginPageNumber", beginPageNumber,
-                        "endPageNumber", endPageNumber));
+                        "endPageNumber", endPageNumber,
+                        "prevPageNumber", prevPageNumber,
+                        "nextPageNumber", nextPageNumber,
+                        "currentPageNumber", page));
     }
 }
