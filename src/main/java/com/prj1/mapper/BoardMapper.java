@@ -44,4 +44,18 @@ public interface BoardMapper {
             WHERE id = #{id}
             """)
     int update(Board board);
+
+    @Select("""
+            SELECT *
+            FROM board
+            ORDER BY id DESC
+            LIMIT #{offset}, 10
+            """)
+    List<Board> selectAllByPage(int offset);
+
+    @Select("""
+            SELECT COUNT(id) 
+            FROM board            
+            """)
+    int countAll();
 }
