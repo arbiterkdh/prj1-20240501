@@ -54,8 +54,8 @@ public interface BoardMapper {
     List<Board> selectAllByPage(int offset);
 
     @Select("""
-            SELECT COUNT(id) 
-            FROM board            
+            SELECT COUNT(id)
+            FROM board
             """)
     int countAll();
 }
