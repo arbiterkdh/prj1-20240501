@@ -32,4 +32,9 @@ ALTER TABLE member
     ADD COLUMN inserted DATETIME NOT NULL DEFAULT NOW();
 
 SELECT *
-FROM member;
+FROM board;
+
+INSERT INTO board
+    (title, content, writer)
+SELECT title, content, writer
+FROM board;
