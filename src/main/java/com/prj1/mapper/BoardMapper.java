@@ -9,16 +9,21 @@ import java.util.List;
 public interface BoardMapper {
 
     @Insert("""
-            INSERT INTO board (title, content, writer)
-            VALUES (#{title}, #{content}, #{writer})
+            INSERT INTO board (title, content, member_id)
+            VALUES (#{title}, #{content}, #{memberId})
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Board board);
 
     @Select("""
-            SELECT *
-            FROM board
-            WHERE id = #{id}
+            SELECT b.id,
+                   b.title,
+                   b.content,
+                   b.inserted,
+                   m.nick_name writer,
+                   m.id member_id
+            FROM board b JOIN member m ON b.member_id = m.id
+            WHERE b.id = #{id}
             """)
     Board selectById(Integer id);
 
@@ -34,7 +39,7 @@ public interface BoardMapper {
                 FROM board
                 WHERE id = #{id}
             """)
-    int deletById(Integer id);
+    int deleteById(Integer id);
 
     @Update("""
             UPDATE board
@@ -46,10 +51,18 @@ public interface BoardMapper {
     int update(Board board);
 
     @Select("""
-            SELECT *
-            FROM board
+            SELECT b.id,
+                   b.title,
+                   m.nick_name writer
+            FROM board b JOIN member m ON b.member_id = m.id
             ORDER BY id DESC
             LIMIT #{offset}, 10
             """)
-    Board selectAllByPage(int offset);
+    List<Board> selectAllByPage(int offset);
+
+    @Select("""
+            SELECT COUNT(*)
+            FROM board
+            """)
+    int countAll();
 }

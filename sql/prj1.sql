@@ -33,6 +33,8 @@ ALTER TABLE member
 
 SELECT *
 FROM board;
+SELECT COUNT(*)
+FROM board;
 
 INSERT INTO board
     (title, content, writer)

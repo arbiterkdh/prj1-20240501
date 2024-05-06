@@ -15,7 +15,6 @@
     <div class="row justify-content-center">
         <div class="col-8">
 
-
             <h3 class="mb-5">게시물 목록</h3>
             <table class="table table-hover">
                 <thead>
@@ -51,12 +50,36 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
-            <c:forEach begin="1" end="20" var="pageNumber">
+            <c:if test="${currentPageNumber > 10}">
+                <c:url var="firstPageLink" value="/">
+                    <c:param name="page" value="1"/>
+                </c:url>
+                <a href="${firstPageLink}">맨앞</a>
+            </c:if>
+            <c:if test="${prevPageNumber >= 1}">
+                <c:url var="prevPageLink" value="/">
+                    <c:param name="page" value="${prevPageNumber}"/>
+                </c:url>
+                <a href="${prevPageLink}">이전</a>
+            </c:if>
+            <c:forEach begin="${beginPageNumber}" end="${endPageNumber}" var="pageNumber">
                 <c:url var="pageLink" value="/">
                     <c:param name="page" value="${pageNumber}"/>
                 </c:url>
                 <a href="${pageLink}">${pageNumber}</a>
             </c:forEach>
+            <c:if test="${nextPageNumber < lastPageNumber}">
+                <c:url var="nextPageLink" value="/">
+                    <c:param name="page" value="${nextPageNumber}"/>
+                </c:url>
+                <a href="${nextPageLink}">다음</a>
+            </c:if>
+            <c:if test="${currentPageNumber < lastPageNumber / 10 * 10 - lastPageNumber % 10 + 1}">
+                <c:url var="lastPageLink" value="/">
+                    <c:param name="page" value="${lastPageNumber}"/>
+                </c:url>
+                <a href="${lastPageLink}">맨뒤</a>
+            </c:if>
         </div>
     </div>
 </div>
