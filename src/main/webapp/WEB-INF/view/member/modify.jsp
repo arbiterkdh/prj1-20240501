@@ -31,12 +31,12 @@
                     <label for="inputPassword" class="form-label">패스워드</label>
                     <input oninput="passwordCheck()" id="inputPassword" type="password" class="form-control"
                            name="password"
-                           value="${member.password}">
+                           value="">
                 </div>
                 <div class="mb-3">
                     <label for="inputPasswordCheck" class="form-label">패스워드 재입력</label>
                     <input oninput="passwordCheck()" id="inputPasswordCheck" type="password" class="form-control"
-                           value="${member.password}">
+                           value="">
                     <div id="passwordMessage" class="form-text"></div>
                     <div class="mb-3">
                         <label for="inputNickName" class="form-label">별명</label>
