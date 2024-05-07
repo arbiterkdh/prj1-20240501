@@ -17,14 +17,24 @@
                     </a>
                 </li>
                 <sec:authorize access="isAuthenticated()">
+                    <sec:authorize access="hasAuthority('admin')">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/list">
+                                회원목록
+                            </a>
+                        </li>
+                    </sec:authorize>
+                    <sec:authorize access="not hasAuthority('admin')">
+                        <sec:authentication property="principal.member" var="authMember"/>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member?id=${authMember.id}">
+                                내정보
+                            </a>
+                        </li>
+                    </sec:authorize>
                     <li class="nav-item">
                         <a class="nav-link" href="/add">
                             글쓰기
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/member/list">
-                            회원목록
                         </a>
                     </li>
                     <li class="nav-item">

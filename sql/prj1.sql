@@ -40,3 +40,24 @@ INSERT INTO board
     (title, content, writer)
 SELECT title, content, writer
 FROM board;
+
+SELECT *
+FROM member;
+DESC member;
+
+CREATE TABLE authority
+(
+    id        INT PRIMARY KEY AUTO_INCREMENT,
+    member_id INT         NOT NULL REFERENCES member (id),
+    name      VARCHAR(20) NOT NULL
+);
+
+INSERT INTO authority
+    (member_id, name)
+VALUES (22, 'admin');
+SELECT *
+FROM authority;
+SELECT m.id, email, password, nick_name, inserted, name
+FROM member m
+         LEFT JOIN authority a ON m.id = a.member_id
+WHERE m.id = 22;

@@ -45,7 +45,8 @@
             </div>
             <sec:authorize access="isAuthenticated()">
                 <sec:authentication property="principal.member" var="member"/>
-                <c:if test="${member.id eq board.memberId}">
+                <sec:authorize access="hasAuthority('admin')" var="isAdmin"/>
+                <c:if test="${member.id eq board.memberId or isAdmin}">
                     <div class="mb-3">
                         <button form="formDelete" class="btn btn-danger">삭제</button>
                         <a href="/modify?id=${board.id}" class="btn btn-secondary">수정</a>

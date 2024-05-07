@@ -23,9 +23,10 @@ public interface MemberMapper {
     List<Member> selectAll();
 
     @Select("""
-            SELECT *
-            FROM member
-            WHERE id = #{id}
+            SELECT m.id, email, password, nick_name, inserted, name
+            FROM member m
+            LEFT JOIN authority a ON m.id = a.member_id
+            WHERE m.id = #{id}
             """)
     Member selectById(Integer id);
 
@@ -49,4 +50,11 @@ public interface MemberMapper {
             WHERE email = #{email}
             """)
     Member selectByEmail(String email);
+
+    @Select("""
+            SELECT name
+            FROM authority
+            WHERE member_id = #{memberId}
+            """)
+    List<String> selectAuthorityByMemberId(Integer memberId);
 }
