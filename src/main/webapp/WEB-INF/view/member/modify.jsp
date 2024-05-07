@@ -46,8 +46,8 @@
                     <div class="mb-3">
                         <button class="btn btn-secondary">변경</button>
                     </div>
+                </div>
             </form>
-
         </div>
     </div>
 </div>
